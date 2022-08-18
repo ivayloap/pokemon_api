@@ -24,11 +24,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_17_184219) do
   end
 
   create_table "slots", force: :cascade do |t|
-    t.integer "pokemon_id"
-    t.integer "type_id"
+    t.bigint "pokemon_id", null: false
+    t.bigint "type_id", null: false
     t.string "external_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["pokemon_id"], name: "index_slots_on_pokemon_id"
+    t.index ["type_id"], name: "index_slots_on_type_id"
   end
 
   create_table "types", force: :cascade do |t|
