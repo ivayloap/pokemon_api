@@ -13,6 +13,7 @@ end
 module PokemonApi
   class Application < Rails::Application
     config.load_defaults 7.0
+    config.autoload_paths += Dir[Rails.root.join('services')]
     config.generators do |g|
       g.test_framework :rspec
     end

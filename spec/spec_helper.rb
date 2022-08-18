@@ -1,4 +1,8 @@
 require 'simplecov'
+require 'webmock/rspec'
+
+WebMock.disable_net_connect!
+
 SimpleCov.start do
  add_filter 'spec'
 end
