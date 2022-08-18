@@ -1,0 +1,17 @@
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/*'
+    - 'Gemfile*'
+    - 'Rakefile'
+    - 'spec/spec_helper.rb'
+    - 'spec/rails_helper.rb'
+    - 'config.ru'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Documentation:
+  Enabled: false # Missing top-level class documentation comment
