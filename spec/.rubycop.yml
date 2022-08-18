@@ -1,0 +1,20 @@
+AllCops:
+  TargetRubyVersion: 2.7
+  DisplayCopNames: true
+  Exclude:
+    - command_line/fixtures/bad_syntax.rb
+  DisabledByDefault: true
+  NewCops: disable
+
+Layout/TrailingWhitespace:
+  Enabled: true
+
+Layout/TrailingEmptyLines:
+  Enabled: true
+  Exclude:
+    - library/coverage/fixtures/some_class.rb
+
+Layout/SpaceInLambdaLiteral:
+  Enabled: true
+  EnforcedStyle: require_space
+

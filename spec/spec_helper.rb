@@ -1,5 +1,6 @@
 require 'simplecov'
 require 'webmock/rspec'
+require 'support/json_helper'
 
 WebMock.disable_net_connect!
 

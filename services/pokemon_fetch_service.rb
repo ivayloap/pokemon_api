@@ -9,7 +9,7 @@ class PokemonFetchService
   private
 
   def fetch_types!
-    results = rest_call(:get, type_endpoint)
+    results = rest_call(type_endpoint)
     results = results[:results]
 
     expected_count = results.count
@@ -21,7 +21,7 @@ class PokemonFetchService
   end
 
   def fetch_pokemons!
-    results = rest_call(:get, pokemon_endpoint)
+    results = rest_call(pokemon_endpoint)
     results = results[:results]
 
     expected_count = results.count
@@ -37,7 +37,7 @@ class PokemonFetchService
     slots_array = []
 
     Pokemon.all.each do |pokemon|
-      data = rest_call(:get, pokemon.url)
+      data = rest_call(pokemon.url)
       pokemon.update(weight: data[:weight].to_s,
                      height: data[:height].to_s,
                      external_id: data[:id].to_s)
@@ -78,13 +78,9 @@ class PokemonFetchService
     HashWithIndifferentAccess.new(JSON.parse(response.body))
   end
 
-  def rest_call(method, url)
+  def rest_call(url)
     connection = Faraday::Connection.new url
-    result = if method == :get
-               connection.get
-             else
-               raise "Method #{method} is not implemented."
-             end
+    result = connection.get
     format_response(result)
   end
 end
