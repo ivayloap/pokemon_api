@@ -10,6 +10,7 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem 'bootsnap'
+gem 'faraday'
 
 group :development, :test do
   gem 'dotenv-rails'
