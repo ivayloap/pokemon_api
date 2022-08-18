@@ -26,4 +26,5 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'simplecov', require: false, group: :test
+  gem "webmock"
 end
