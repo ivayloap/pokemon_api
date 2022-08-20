@@ -12,6 +12,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem 'bootsnap'
 gem 'faraday'
 gem 'rubocop'
+gem 'will_paginate'
 
 group :development, :test do
   gem 'dotenv-rails'
