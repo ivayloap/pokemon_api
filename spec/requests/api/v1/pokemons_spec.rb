@@ -33,5 +33,19 @@ RSpec.describe 'Api::V1::Pokemons', type: :request do
       matching_attributes = %w[id name weight height external_id]
       expect(result.slice(matching_attributes)).to eq pokemon.attributes.slice(matching_attributes)
     end
+
+    context 'errors' do
+      let(:wrong_id) { pokemon.id + 1 }
+      let(:wrong_name) { "#{pokemon.name}a" }
+      it 'returns error for non existing id' do
+        get endpoint, params: { id: wrong_id }
+        expect(JSON.parse(response.body)).to eq({ 'error' => PokemonNotFound.new('id' => wrong_id).message })
+      end
+
+      it 'returns error for non existing name' do
+        get endpoint, params: { name: wrong_name }
+        expect(JSON.parse(response.body)).to eq({ 'error' => PokemonNotFound.new('name' => wrong_name).message })
+      end
+    end
   end
 end

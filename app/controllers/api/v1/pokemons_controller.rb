@@ -16,7 +16,10 @@ module Api
       end
 
       def pokemon_with_types
-        pokemon.includes(:types)&.first
+        result = pokemon.includes(:types)&.first
+        raise PokemonNotFound, permitted_params.slice(:id, :name) unless result
+
+        result
       end
 
       def pokemons
