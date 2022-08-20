@@ -13,6 +13,7 @@ gem 'bootsnap'
 gem 'faraday'
 gem 'rubocop'
 gem 'will_paginate'
+gem 'active_model_serializers'
 
 group :development, :test do
   gem 'dotenv-rails'
