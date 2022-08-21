@@ -9,7 +9,7 @@ class PokemonFetchService
   private
 
   def fetch_types!
-    Rails.logger.info("[INFO] Start pokemon fetching.")
+    Rails.logger.info('[INFO] Start pokemon fetching.')
     results = rest_call(type_endpoint)
     results = results[:results]
 

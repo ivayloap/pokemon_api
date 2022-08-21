@@ -24,7 +24,7 @@ RSpec.describe PokemonFetchService do
 
       pokemon = Pokemon.last
       expect(pokemon.external_id).to eq '33'
-      expect(pokemon.types.first.name).to eq 'matching_type'
+      expect(pokemon.types.first.name).to eq 'fighting'
     end
   end
 end
