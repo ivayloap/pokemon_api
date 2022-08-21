@@ -1,0 +1,139 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Pokemon Api
+  contact:
+    name: Pokemon Api
+  description: Service for handling Pokemon data.
+tags:
+  - name: Pokemons
+  - name: Pokemon
+paths:
+  /api/v1/pokemons:
+    get:
+      summary: Fetches all the available pokemons in pagination fashion.
+      operationId: getPokemons
+      description: Fetches a page of pokemons.
+      tags:
+        - Pokemons
+      parameters:
+        - in: path
+          name: page
+          schema:
+            type: string
+            example: '1'
+          description: fetches particular page of the full pokemons list
+          required: true
+        - in: path
+          name: per_page
+          schema:
+            type: string
+            example: '10'
+          description: selects how many pokemons should be returned per page
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: the id of the pokemon
+                      example: 5
+                    name:
+                      type: string
+                      description: the name of the pokemon
+                      example: bulbasaur
+                    types:
+                      type: array
+                      items:
+                        $ref: '#components/schemas/Type'
+  /api/v1/pokemon:
+    get:
+      summary: Fetches single pokemon data by id or name.
+      operationId: getPokemon
+      description: Fetches single pokemon.
+      tags:
+        - Pokemon
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            example: '5'
+          description: Pokemon id
+          required: true
+        - in: path
+          name: name
+          schema:
+            type: string
+            example: 'pikachu'
+          description: Pokemon name
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: the id of the pokemon
+                    example: 5
+                  name:
+                    type: string
+                    description: the name of the pokemon
+                    example: bulbasaur
+                  weight:
+                    type: string
+                    description: the weight of the pokemon in kilograms
+                    example: 40
+                  height:
+                    type: string
+                    description: the weight of the pokemon in centimeters
+                    example: 30
+                  types:
+                    type: array
+                    items:
+                      $ref: '#components/schemas/Type'
+        '404':
+          description: Pokemon not found with the requested identifier (id or name)
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#components/schemas/ErrorPokemonNotFoundByName'
+                  - $ref: '#components/schemas/ErrorPokemonNotFoundById'
+components:
+  schemas:
+    ErrorPokemonNotFoundByName:
+      type: object
+      properties:
+        error:
+          type: string
+          description: human readable error
+          example: There is no pokemon by the name 'pikachu'
+    ErrorPokemonNotFoundById:
+      type: object
+      properties:
+        error:
+          type: string
+          description: human readable error
+          example: There is no pokemon with id=5
+    Type:
+      type: object
+      properties:
+        id:
+          type: string
+          description: the id of the type
+          example: 10
+        name:
+          type: string
+          description: the name of the type
+          example: fighting
